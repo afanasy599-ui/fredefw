@@ -63,8 +63,13 @@ public final class InterstellarExperienceClient implements ClientModInitializer 
                 client.player.sendMessage(Text.literal("§5[INTERSTELLAR] §fРежим свободного полёта доступен только в одиночном мире."), true);
                 continue;
             }
-            if (flightActive) exitFlight(client);
-            else enterFlight(client);
+            if (flightActive) {
+                exitFlight(client);
+            } else {
+                // Open the actual 3D Tesseract scene. The old key only enabled
+                // vanilla flight and left the cinematic renderer unused.
+                client.setScreen(new TesseractScreen());
+            }
         }
 
         if (flightActive) {
@@ -117,7 +122,7 @@ public final class InterstellarExperienceClient implements ClientModInitializer 
         client.options.setPerspective(Perspective.FIRST_PERSON);
         flightActive = true;
 
-        player.sendMessage(Text.literal("§5[INTERSTELLAR] §fТессеракт активирован. WASD — полёт, Space — вверх, Shift — вниз. O — выход."), true);
+        player.sendMessage(Text.literal("§5[INTERSTELLAR] §fСвободный полёт активирован. O — выход."), true);
         playQuote();
     }
 
