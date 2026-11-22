@@ -30,9 +30,12 @@ jobs:
       - name: Build mod
         run: gradle build --no-daemon
 
+      - name: Show build files
+        run: ls -lah build/libs/
+
       - name: Upload mod JAR
         uses: actions/upload-artifact@v4
         with:
-          name: InterstellarExperience-Fabric-1.21.11-v0.5.0
-          path: build/libs/interstellar-experience-0.5.0.jar
+          name: InterstellarExperience-0.5.0
+          path: build/libs/*.jar
           if-no-files-found: error
